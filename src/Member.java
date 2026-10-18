@@ -10,7 +10,11 @@ public class Member {
     }
 
     public void setNama(String nama) {
-        this.nama = nama;
+        if (nama == null || nama.trim().isEmpty()){
+            System.out.println("Nama tidak boleh kosong atau hanya berisi spasi");
+            return;
+        }
+        this.nama = nama.trim();
     }
 
     public String getNoTelepon() {
@@ -26,7 +30,11 @@ public class Member {
     }
 
     public void setTanggalDaftar(String tanggalDaftar) {
-        this.tanggalDaftar = tanggalDaftar;
+        if (tanggalDaftar == null || tanggalDaftar.trim().isEmpty()){
+            System.out.println("Tanggal tidak boleh kosong");
+            return;
+        }
+        this.tanggalDaftar = tanggalDaftar.trim();
     }
 
     public String getJenisPaket() {
