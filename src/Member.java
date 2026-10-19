@@ -22,6 +22,20 @@ public class Member {
     }
 
     public void setNoTelepon(String noTelepon) {
+        boolean valid = noTelepon != null
+                && noTelepon.startsWith("0")
+                && noTelepon.length()>= 10;
+        if (valid){
+            for(int i=0; i<noTelepon.length(); i++){
+                if(!Character.isDigit(noTelepon.charAt(i))){
+                    valid = false;
+                }
+            }
+        }
+        if (!valid){
+            System.out.println("no harus diawali angka 0, hanya berisi angka dan minimal 10 digit");
+            return;
+        }
         this.noTelepon = noTelepon;
     }
 
