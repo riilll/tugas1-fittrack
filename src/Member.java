@@ -56,6 +56,10 @@ public class Member {
     }
 
     public void setJenisPaket(String jenisPaket) {
+        if (!"Basic".equals(jenisPaket) && !"Premium".equals(jenisPaket) && !"VIP".equals(jenisPaket)){
+            System.out.println("Jens paket harus Basic, Premium, atau VIP (penulisan harus sama)");
+            return;
+        }
         this.jenisPaket = jenisPaket;
     }
 }
