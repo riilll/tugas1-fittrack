@@ -5,6 +5,13 @@ public class Member {
     private String tanggalDaftar = "Belum diisi";
     private String jenisPaket = "Basic";
 
+    public Member(String nama, String noTelepon, String tanggalDaftar, String jenisPaket){
+        setNama(nama);
+        setNoTelepon(noTelepon);
+        setTanggalDaftar(tanggalDaftar);
+        setjenisPaket(jenisPaket);
+    }
+    
     public String getNama() {
         return nama;
     }
@@ -57,7 +64,7 @@ public class Member {
 
     public void setJenisPaket(String jenisPaket) {
         if (!"Basic".equals(jenisPaket) && !"Premium".equals(jenisPaket) && !"VIP".equals(jenisPaket)){
-            System.out.println("Jens paket harus Basic, Premium, atau VIP (penulisan harus sama)");
+            System.out.println("Jenis paket harus Basic, Premium, atau VIP (penulisan harus sama)");
             return;
         }
         this.jenisPaket = jenisPaket;
