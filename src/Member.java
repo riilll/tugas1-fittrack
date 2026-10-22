@@ -12,6 +12,9 @@ public class Member {
         setjenisPaket(jenisPaket);
     }
     
+    public Member(String nama, String noTelepon, String tanggalDaftar){
+        this(nama, noTelepon, tanggalDaftar, "Basic");
+    }
     public String getNama() {
         return nama;
     }
