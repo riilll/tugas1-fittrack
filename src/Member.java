@@ -39,7 +39,7 @@ public class Member {
     }
 
     public void setNama(String nama) {
-        if (nama == null || nama.trim().isEmpty()) {
+        if (isTeksKosong(nama)) {
             System.out.println("Nama ditolak: nama tidak boleh kosong atau hanya berisi spasi");
             return;
         }
@@ -51,17 +51,7 @@ public class Member {
     }
 
     public void setNoTelepon(String noTelepon) {
-        boolean valid = noTelepon != null
-                && noTelepon.startsWith(AWALAN_NOMOR_TELEPON)
-                && noTelepon.length() >= PANJANG_MINIMAL_NOMOR_TELEPON;
-        if (valid) {
-            for (int i = 0; i < noTelepon.length(); i++) {
-                if (!Character.isDigit(noTelepon.charAt(i))) {
-                    valid = false;
-                }
-            }
-        }
-        if (!valid) {
+        if (!isNomorTeleponValid(noTelepon)) {
             System.out.println("Nomor telepon ditolak: harus diawali angka "
                     + AWALAN_NOMOR_TELEPON + ", hanya berisi angka, dan minimal "
                     + PANJANG_MINIMAL_NOMOR_TELEPON + " digit");
@@ -75,7 +65,7 @@ public class Member {
     }
 
     public void setTanggalDaftar(String tanggalDaftar) {
-        if (tanggalDaftar == null || tanggalDaftar.trim().isEmpty()) {
+        if (isTeksKosong(tanggalDaftar)) {
             System.out.println("Tanggal daftar ditolak: tanggal tidak boleh kosong");
             return;
         }
@@ -87,9 +77,7 @@ public class Member {
     }
 
     public void setJenisPaket(String jenisPaket) {
-        if (!PAKET_BASIC.equals(jenisPaket)
-                && !PAKET_PREMIUM.equals(jenisPaket)
-                && !PAKET_VIP.equals(jenisPaket)) {
+        if (!isPaketValid(jenisPaket)) {
             System.out.println("Jenis paket ditolak: pilihan hanya " + PAKET_BASIC + ", "
                     + PAKET_PREMIUM + ", atau " + PAKET_VIP + " (penulisan harus persis)");
             return;
@@ -101,5 +89,35 @@ public class Member {
     public String toString() {
         return "Member{nama='" + nama + "', noTelepon='" + noTelepon
                 + "', tanggalDaftar='" + tanggalDaftar + "', jenisPaket='" + jenisPaket + "'}";
+    }
+
+    /** Memeriksa apakah teks null, kosong, atau hanya berisi spasi. */
+    private boolean isTeksKosong(String teks) {
+        return teks == null || teks.trim().isEmpty();
+    }
+
+    /** Memeriksa awalan, panjang, dan isi nomor telepon. */
+    private boolean isNomorTeleponValid(String nomor) {
+        return nomor != null
+                && nomor.startsWith(AWALAN_NOMOR_TELEPON)
+                && nomor.length() >= PANJANG_MINIMAL_NOMOR_TELEPON
+                && isSemuaDigit(nomor);
+    }
+
+    /** Memeriksa apakah seluruh karakter teks adalah angka. */
+    private boolean isSemuaDigit(String teks) {
+        for (int i = 0; i < teks.length(); i++) {
+            if (!Character.isDigit(teks.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** Memeriksa apakah paket sama persis dengan salah satu pilihan resmi. */
+    private boolean isPaketValid(String paket) {
+        return PAKET_BASIC.equals(paket)
+                || PAKET_PREMIUM.equals(paket)
+                || PAKET_VIP.equals(paket);
     }
 }
