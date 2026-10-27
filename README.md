@@ -45,3 +45,7 @@ melalui penerapan konsep-konsep tersebut, FitTrack dikembangkan dengan memperhat
 - **Object Management:** Mengelola banyak objek menggunakan array dan perulangan.
 
 > **Progress Day 9:** Implementasi array of objects dan perulangan `for` untuk menyimpan serta menampilkan data member pada class `TesFitTrack`.
+
+# cara menjalankan program:
+javac -d out src/*.java
+java -cp out TesFitTrack
