@@ -1,5 +1,15 @@
+/**
+ * Program uji untuk class Member pada sistem keanggotaan FitTrack.
+ * Menunjukkan pembuatan objek, penolakan data tidak valid, dan pencetakan
+ * seluruh member dari array.
+ */
 public class TesFitTrack {
 
+    /**
+     * Titik masuk program uji.
+     *
+     * @param args argumen command line (tidak dipakai)
+     */
     public static void main(String[] args) {
         System.out.println("=== Membuat data member ===");
         Member[] daftarMember = {
