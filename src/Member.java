@@ -1,3 +1,8 @@
+/**
+ * Merepresentasikan satu member yang terdaftar di FitTrack.
+ * Class ini menyimpan data pribadi member dan memastikan setiap
+ * perubahan data lolos validasi sebelum disimpan.
+ */
 public class Member {
 
     /** Awalan wajib untuk nomor telepon. */
@@ -23,6 +28,16 @@ public class Member {
     private String tanggalDaftar = NILAI_BELUM_DIISI;
     private String jenisPaket = PAKET_BASIC;
 
+    /**
+     * Membuat member lengkap. Setiap nilai diisi lewat setter sehingga
+     * validasi berlaku juga di constructor. Nilai yang tidak valid diganti
+     * dengan nilai default dan pesan penolakan dicetak.
+     * 
+     * @param nama          nama lengkap member, tidak boleh kosong
+     * @param noTelepon     nomor telepon, diawali 0 dan minimal 10 digit
+     * @param tanggalDaftar tanggal pendaftaran, tidak boleh kosong
+     * @param jenisPaket    jenis paket: Basic, Premium, atau VIP
+     */
     public Member(String nama, String noTelepon, String tanggalDaftar, String jenisPaket) {
         setNama(nama);
         setNoTelepon(noTelepon);
@@ -30,14 +45,32 @@ public class Member {
         setJenisPaket(jenisPaket);
     }
 
+    /**
+     * Membuat member dengan paket otomatis Basic.
+     * 
+     * @param nama          nama lengkap member, tidak boleh kosong
+     * @param noTelepon     nomor telepon, diawali 0 dan minimal 10 digit
+     * @param tanggalDaftar tanggal pendaftaran, tidak boleh kosong
+     */
     public Member(String nama, String noTelepon, String tanggalDaftar) {
         this(nama, noTelepon, tanggalDaftar, PAKET_BASIC);
     }
 
+    /**
+     * Mengambil nama member.
+     * 
+     * @return nama member
+     */
     public String getNama() {
         return nama;
     }
 
+    /**
+     * Mengubah nama member setelah melalui validasi. Jika nama kosong atau
+     * hanya berisi spasi, nama lama dipertahankan dan pesan penolakan dicetak.
+     * 
+     * @param nama nama baru, tidak boleh kosong atau hanya spasi
+     */
     public void setNama(String nama) {
         if (isTeksKosong(nama)) {
             System.out.println("Nama ditolak: nama tidak boleh kosong atau hanya berisi spasi");
@@ -46,10 +79,23 @@ public class Member {
         this.nama = nama.trim();
     }
 
+    /**
+     * Mengambil nomor telepon member.
+     * 
+     * @return nomor telepon member
+     */
     public String getNoTelepon() {
         return noTelepon;
     }
 
+    /**
+     * Mengubah nomor telepon member setelah melalui validasi format.
+     * Jika format tidak valid, nomor lama dipertahankan dan pesan
+     * penolakan dicetak.
+     * 
+     * @param noTelepon nomor telepon baru, wajib diawali angka 0
+     *                  dan memiliki panjang minimal 10 digit
+     */
     public void setNoTelepon(String noTelepon) {
         if (!isNomorTeleponValid(noTelepon)) {
             System.out.println("Nomor telepon ditolak: harus diawali angka "
@@ -60,10 +106,21 @@ public class Member {
         this.noTelepon = noTelepon;
     }
 
+    /**
+     * Mengambil tanggal pendaftaran member.
+     * 
+     * @return tanggal pendaftaran member
+     */
     public String getTanggalDaftar() {
         return tanggalDaftar;
     }
 
+    /**
+     * Mengubah tanggal pendaftaran setelah melalui validasi. Jika tanggal
+     * kosong, tanggal lama dipertahankan dan pesan penolakan dicetak.
+     * 
+     * @param tanggalDaftar tanggal baru, tidak boleh kosong
+     */
     public void setTanggalDaftar(String tanggalDaftar) {
         if (isTeksKosong(tanggalDaftar)) {
             System.out.println("Tanggal daftar ditolak: tanggal tidak boleh kosong");
@@ -72,10 +129,22 @@ public class Member {
         this.tanggalDaftar = tanggalDaftar.trim();
     }
 
+    /**
+     * Mengambil jenis paket keanggotaan.
+     * 
+     * @return jenis paket member
+     */
     public String getJenisPaket() {
         return jenisPaket;
     }
 
+    /**
+     * Mengubah jenis paket setelah melalui validasi. Jika paket di luar
+     * Basic, Premium, atau VIP, paket lama dipertahankan dan pesan
+     * penolakan dicetak.
+     * 
+     * @param jenisPaket paket baru, penulisan harus persis Basic, Premium, atau VIP
+     */
     public void setJenisPaket(String jenisPaket) {
         if (!isPaketValid(jenisPaket)) {
             System.out.println("Jenis paket ditolak: pilihan hanya " + PAKET_BASIC + ", "
@@ -85,6 +154,11 @@ public class Member {
         this.jenisPaket = jenisPaket;
     }
 
+    /**
+     * Menghasilkan representasi teks member yang berlabel.
+     * 
+     * @return data member dalam satu baris berlabel
+     */
     @Override
     public String toString() {
         return "Member{nama='" + nama + "', noTelepon='" + noTelepon
